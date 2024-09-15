@@ -22,13 +22,24 @@ jobs:
 
     steps:
     - uses: actions/checkout@v4
-    - name: Set up Python
+    - name: Set up Python 3.11
       uses: actions/setup-python@v3
       with:
-        python-version: '3.x'
+        python-version: '3.11'
+
+        
+    - name: Install distutils
+      run: sudo apt-get update && sudo apt-get install -y python3-distutils
+
+    - name: Check if distutils is available
+      run: python -c "import distutils; print('distutils is available')"
     - name: Install dependencies
+    
+    
+
       run: |
         python -m pip install --upgrade pip
+        pip install -r requirements.txt
         pip install build
     - name: Build package
       run: python -m build
